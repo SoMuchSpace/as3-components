@@ -7,6 +7,7 @@ package SoMuchSpace.components.scrollbar
 	import flash.geom.Point;
 	import flash.utils.Timer;
 	import SoMuchSpace.components.BaseButton;
+	import SoMuchSpace.components.ButtonState;
 	import SoMuchSpace.components.Container;
 	
 	/**
@@ -146,7 +147,7 @@ package SoMuchSpace.components.scrollbar
 		
 		private function onSliderDrag(e:MouseEvent):void 
 		{
-			middleButton.currentState = BaseButton.DOWN_STATE;
+			middleButton.currentState = ButtonState.DOWN_STATE;
 			if (type == VERTICAL)
 			{
 				scrollPosition = (mouseY - (startMousePoint.y) - firstButton.componentHeight) * (maxScrollPosition - minScrollPosition) / (componentHeight - firstButton.componentHeight - lastButton.componentHeight - middleButton.componentHeight);
@@ -164,11 +165,11 @@ package SoMuchSpace.components.scrollbar
 			stage.removeEventListener(Event.ENTER_FRAME, onScrollTimerTick);
 			if (stage.getObjectsUnderPoint(new Point(stage.mouseX, stage.mouseY)).indexOf(middleButton) < 0)
 			{
-				middleButton.currentState = BaseButton.UP_STATE;
+				middleButton.currentState = ButtonState.UP_STATE;
 			}
 			else
 			{
-				middleButton.currentState = BaseButton.OVER_STATE;
+				middleButton.currentState = ButtonState.OVER_STATE;
 			}
 		}
 		
@@ -192,11 +193,11 @@ package SoMuchSpace.components.scrollbar
 			{
 				e.target.delay = 50;
 			}
-			if (firstButton.currentState == BaseButton.DOWN_STATE)
+			if (firstButton.currentState == ButtonState.DOWN_STATE)
 			{
 				scrollPosition -= arrowsScrollSize;
 			}
-			else if (lastButton.currentState == BaseButton.DOWN_STATE)
+			else if (lastButton.currentState == ButtonState.DOWN_STATE)
 			{
 				scrollPosition += arrowsScrollSize;
 			}

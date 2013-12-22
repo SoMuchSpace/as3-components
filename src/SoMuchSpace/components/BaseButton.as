@@ -8,12 +8,6 @@ package SoMuchSpace.components
 	 */
 	public class BaseButton extends Component
 	{	
-		public static const UP_STATE:String = "upState";
-		public static const OVER_STATE:String = "overState";
-		public static const DOWN_STATE:String = "downState";
-		public static const SELECTED_OVER_STATE:String = "selectedOverState";
-		public static const TOGGLED_STATE:String = "toggledState";
-		public static const NOT_ENABLED_STATE:String = "notEnabledState";
 		
 		private var _canToggle:Boolean = false;
 		
@@ -24,7 +18,7 @@ package SoMuchSpace.components
 		
 		private var _toggled:Boolean = false;
 		
-		private var _cuttentState:String = UP_STATE;
+		private var _cuttentState:String = ButtonState.UP_STATE;
 		
 		private var _mouseIsDown:Boolean = false;
 		private var _mouseIsOver:Boolean = false;
@@ -47,28 +41,28 @@ package SoMuchSpace.components
 			{
 				if (_haveSelectedOverState && !_mouseIsDown)
 				{
-					currentState = SELECTED_OVER_STATE;
+					currentState = ButtonState.SELECTED_OVER_STATE;
 				}
 				else
 				{
-					currentState = DOWN_STATE;
+					currentState = ButtonState.DOWN_STATE;
 				}
 			}
 			else
 			{
 				if (_mouseIsDown)
 				{
-					currentState = DOWN_STATE;
+					currentState = ButtonState.DOWN_STATE;
 				}
 				else
 				{
 					if (_haveOverState)
 					{
-						currentState = OVER_STATE;
+						currentState = ButtonState.OVER_STATE;
 					}
 					else
 					{
-						currentState = UP_STATE;
+						currentState = ButtonState.UP_STATE;
 					}
 				}
 			}
@@ -85,23 +79,23 @@ package SoMuchSpace.components
 			{
 				if (toggled)
 				{
-					currentState = DOWN_STATE;
+					currentState = ButtonState.DOWN_STATE;
 				}
 				else
 				{
-					currentState = UP_STATE;
+					currentState = ButtonState.UP_STATE;
 				}
 			}
 			else
 			{
-				currentState = UP_STATE;
+				currentState = ButtonState.UP_STATE;
 			}
 		}
 		
 		private function mouseDownHandler(e:MouseEvent):void 
 		{
 			_mouseIsDown = true;
-			currentState = DOWN_STATE;
+			currentState = ButtonState.DOWN_STATE;
 			stage.addEventListener(MouseEvent.MOUSE_UP, mouseUpHandler);
 		}
 		
@@ -117,22 +111,22 @@ package SoMuchSpace.components
 			{
 				if (_mouseIsOver && _haveSelectedOverState)
 				{
-					currentState = SELECTED_OVER_STATE;
+					currentState = ButtonState.SELECTED_OVER_STATE;
 				}
 				else
 				{
-					currentState = TOGGLED_STATE;
+					currentState = ButtonState.TOGGLED_STATE;
 				}
 			}
 			else
 			{
 				if (_mouseIsOver && _haveOverState)
 				{
-					currentState = OVER_STATE;
+					currentState = ButtonState.OVER_STATE;
 				}
 				else
 				{
-					currentState = UP_STATE;
+					currentState = ButtonState.UP_STATE;
 				}
 			}
 		}
@@ -141,22 +135,22 @@ package SoMuchSpace.components
 		{
 			switch (currentState) 
 			{
-				case UP_STATE:
+				case ButtonState.UP_STATE:
 					upView();
 					break;
-				case OVER_STATE:
+				case ButtonState.OVER_STATE:
 					overView();
 					break;
-				case DOWN_STATE:
+				case ButtonState.DOWN_STATE:
 					downView();
 					break;
-				case TOGGLED_STATE:
+				case ButtonState.TOGGLED_STATE:
 					toggledView();
 					break;
-				case SELECTED_OVER_STATE:
+				case ButtonState.SELECTED_OVER_STATE:
 					selectedOverView();
 					break;
-				case NOT_ENABLED_STATE:
+				case ButtonState.NOT_ENABLED_STATE:
 					notEnabledView();
 					break;
 				default:
@@ -240,11 +234,11 @@ package SoMuchSpace.components
 			{
 				if (value)
 				{
-					currentState = UP_STATE;
+					currentState = ButtonState.UP_STATE;
 				}
 				else
 				{
-					currentState = NOT_ENABLED_STATE;
+					currentState = ButtonState.NOT_ENABLED_STATE;
 				}
 			}
 			super.enabled = value;
@@ -272,13 +266,13 @@ package SoMuchSpace.components
 				if (value)
 				{
 					_toggled = value;
-					currentState = DOWN_STATE;
+					currentState = ButtonState.DOWN_STATE;
 					
 				}
 				else
 				{
 					_toggled = value;
-					currentState = UP_STATE;
+					currentState = ButtonState.UP_STATE;
 					
 				}
 				dispatchEvent(new Event(Event.SELECT));
