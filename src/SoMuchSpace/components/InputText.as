@@ -10,11 +10,11 @@ package SoMuchSpace.components
 	 * ...
 	 * @author SoMuchSpace
 	 */
-	public class TextInput extends Component
+	public class InputText extends Component
 	{
 		private var _textField:TextField;
 		
-		public function TextInput(text:String = "") 
+		public function InputText(text:String = "") 
 		{
 			_textField = ComponentUtils.getTunedTextField(14, 0x000000, TextFieldAutoSize.NONE);
 			_textField.background = true;
