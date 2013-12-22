@@ -2,7 +2,7 @@ package SoMuchSpace.components
 {
 	/**
 	 * ...
-	 * @author 
+	 * @author SoMuchSpace
 	 */
 	public class ComponentUtils 
 	{

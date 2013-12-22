@@ -4,7 +4,7 @@ package SoMuchSpace.components.scrollbar
 	
 	/**
 	 * ...
-	 * @author DanPo
+	 * @author SoMuchSpace
 	 */
 	internal class ScrollbarDragButton extends BaseButton
 	{

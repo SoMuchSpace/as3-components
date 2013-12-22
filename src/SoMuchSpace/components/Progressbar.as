@@ -5,7 +5,7 @@ package SoMuchSpace.components
 	import flash.geom.Matrix;
 	/**
 	 * ...
-	 * @author DanPo
+	 * @author SoMuchSpace
 	 */
 	public class Progressbar extends Component
 	{

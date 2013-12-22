@@ -2,7 +2,7 @@ package SoMuchSpace.components.mouse
 {
 	/**
 	 * ...
-	 * @author 
+	 * @author SoMuchSpace
 	 */
 	public class CustomMouseCursor 
 	{

@@ -9,7 +9,7 @@ package SoMuchSpace.components.buttons
 	
 	/**
 	 * ...
-	 * @author DanPo
+	 * @author SoMuchSpace
 	 */
 	public class TextButton extends BaseButton
 	{

@@ -7,7 +7,7 @@ package SoMuchSpace.components
 	import SoMuchSpace.components.scrollbar.Scrollbar;
 	/**
 	 * ...
-	 * @author DanPo
+	 * @author SoMuchSpace
 	 */
 	public class ScrollPane extends Panel
 	{

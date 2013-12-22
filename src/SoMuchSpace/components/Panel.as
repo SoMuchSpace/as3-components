@@ -3,7 +3,7 @@ package SoMuchSpace.components
 	import flash.display.Sprite;
 	/**
 	 * Компонент Панель.
-	 * @author DanPo
+	 * @author SoMuchSpace
 	 */
 	public class Panel extends Container
 	{

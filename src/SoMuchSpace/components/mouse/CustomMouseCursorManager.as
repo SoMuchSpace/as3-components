@@ -8,7 +8,7 @@ package SoMuchSpace.components.mouse
 	import SoMuchSpace.controller.IController;
 	/**
 	 * ...
-	 * @author 
+	 * @author SoMuchSpace
 	 */
 	public class CustomMouseCursorManager implements IController
 	{

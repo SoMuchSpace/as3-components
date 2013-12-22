@@ -5,7 +5,7 @@ package SoMuchSpace.components
 	import SoMuchSpace.components.events.ComponentEvent;
 	/**
 	 * Базовый класс для компонентов.
-	 * @author DanPo
+	 * @author SoMuchSpace
 	 */
 	[Event(name="resizeComponent", type="SoMuchSpace.components.events.ComponentEvent")]
 	[Event(name="moveComponent", type="SoMuchSpace.components.events.ComponentEvent")]

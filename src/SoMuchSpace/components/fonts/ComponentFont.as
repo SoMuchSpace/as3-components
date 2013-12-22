@@ -2,7 +2,7 @@ package SoMuchSpace.components.fonts
 {
 	/**
 	 * ...
-	 * @author 
+	 * @author SoMuchSpace
 	 */
 	public class ComponentFont 
 	{

@@ -4,7 +4,7 @@ package SoMuchSpace.components
 	import flash.events.MouseEvent;
 	/**
 	 * Конмонент Конопка.
-	 * @author DanPo
+	 * @author SoMuchSpace
 	 */
 	public class BaseButton extends Component
 	{	

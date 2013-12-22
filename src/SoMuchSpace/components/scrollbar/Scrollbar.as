@@ -11,7 +11,7 @@ package SoMuchSpace.components.scrollbar
 	
 	/**
 	 * ...
-	 * @author DanPo
+	 * @author SoMuchSpace
 	 */
 	[Event(name="change", type="flash.events.Event")]
 	public class Scrollbar extends Container

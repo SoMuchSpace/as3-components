@@ -2,7 +2,7 @@ package SoMuchSpace.components
 {
 	/**
 	 * ...
-	 * @author DanPo
+	 * @author SoMuchSpace
 	 */
 	public class Container extends Component
 	{

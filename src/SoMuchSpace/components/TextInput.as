@@ -7,7 +7,7 @@ package SoMuchSpace.components
 	import SoMuchSpace.components.fonts.ComponentFont;
 	/**
 	 * ...
-	 * @author ...
+	 * @author SoMuchSpace
 	 */
 	public class TextInput extends Component
 	{

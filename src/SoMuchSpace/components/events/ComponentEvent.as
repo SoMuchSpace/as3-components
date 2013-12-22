@@ -3,7 +3,7 @@ package SoMuchSpace.components.events
 	import flash.events.Event;
 	/**
 	 * ...
-	 * @author DanPo
+	 * @author SoMuchSpace
 	 */
 	public class ComponentEvent extends Event
 	{

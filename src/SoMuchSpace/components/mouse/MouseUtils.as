@@ -4,7 +4,7 @@ package SoMuchSpace.components.mouse
 	import flash.events.MouseEvent;
 	/**
 	 * ...
-	 * @author 
+	 * @author SoMuchSpace
 	 */
 	public class MouseUtils 
 	{
