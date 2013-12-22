@@ -302,9 +302,13 @@ package SoMuchSpace.components.buttons
 		}
 		
 		/**
-		 * Изменяет ли свой вид кнопка при наведении на нее курсора в нажатом состоянии
+		 * Изменяет ли свой вид кнопка при наведении на нее курсора в нажатом 
+		 * состоянии
 		 */
-		public function get haveSelectedOverState():Boolean { return _haveSelectedOverState; }
+		public function get haveSelectedOverState():Boolean
+		{
+			return _haveSelectedOverState;
+		}
 		
 		public function set haveSelectedOverState(value:Boolean):void 
 		{

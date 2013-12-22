@@ -25,7 +25,8 @@ package SoMuchSpace.components
 		
 		private var hitSprite:Sprite = new Sprite();
 		
-		public function ScrollPane(verticalScrollbarDisplayPolicy:String = "scrollbarAsNeeded", horizontalScrollbarDisplayPolicy:String = "scrollbarAsNeeded")
+		public function ScrollPane(verticalScrollbarDisplayPolicy:String = "scrollbarAsNeeded", 
+									horizontalScrollbarDisplayPolicy:String = "scrollbarAsNeeded")
 		{
 			super();
 			

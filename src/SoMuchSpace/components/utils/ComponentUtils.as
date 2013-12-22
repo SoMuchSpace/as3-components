@@ -21,7 +21,8 @@ package SoMuchSpace.components.utils
 			return component.y + component.componentHeight + offset;
 		}
 		
-		public static function getTunedTextField(size:int = 14, color:Number = 0x000000, autoSize:String = "left"):TextField
+		public static function getTunedTextField(size:int = 14, color:Number = 0x000000,
+			autoSize:String = "left"):TextField
 		{
 			var newTextField:TextField = new TextField();
 			newTextField.embedFonts = true;

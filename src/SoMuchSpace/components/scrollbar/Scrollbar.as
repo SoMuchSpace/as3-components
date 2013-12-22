@@ -41,13 +41,17 @@ package SoMuchSpace.components.scrollbar
 		
 		/**
 		 * Создает компонент Scrollbar
-		 * @param	type тип скруллбара: ScrollbarType.VERTICAL или ScrollbarType.HORIZONTAL
-		 * @param	viewportSize размер видимой области прокручиваемого объекта по нужной оси.
+		 * @param	type тип скруллбара: ScrollbarType.VERTICAL или
+		 * ScrollbarType.HORIZONTAL
+		 * @param	viewportSize размер видимой области прокручиваемого объекта
+		 * по нужной оси.
 		 * @param	minScrollPosition
 		 * @param	maxScrollPosition
 		 * @param	roundScrollPosition
 		 */
-		public function Scrollbar(type:String, wholeSize:Number = 1, minScrollPosition:Number = 0, maxScrollPosition:Number = 0, roundScrollPosition:Boolean = true)
+		public function Scrollbar(type:String, wholeSize:Number = 1, 
+			minScrollPosition:Number = 0, maxScrollPosition:Number = 0, 
+			roundScrollPosition:Boolean = true)
 		{
 			super();
 			this.type = type;
@@ -108,11 +112,17 @@ package SoMuchSpace.components.scrollbar
 		{
 			if (type == ScrollbarType.VERTICAL)
 			{
-				scrollPosition = (mouseY - _firstButton.componentHeight - _middleButton.componentHeight / 2) * (maxScrollPosition - minScrollPosition) / (componentHeight - _firstButton.componentHeight - _lastButton.componentHeight - _middleButton.componentHeight);
+				scrollPosition = (mouseY - _firstButton.componentHeight - _middleButton.componentHeight / 2)
+					* (maxScrollPosition - minScrollPosition)
+					/ (componentHeight - _firstButton.componentHeight - _lastButton.componentHeight
+					- _middleButton.componentHeight);
 			}
 			else if (type == ScrollbarType.HORIZONTAL)
 			{
-				scrollPosition = (mouseX - _firstButton.componentWidth - _middleButton.componentWidth / 2) * (maxScrollPosition - minScrollPosition) / (componentWidth - _firstButton.componentWidth - _lastButton.componentWidth - _middleButton.componentWidth);
+				scrollPosition = (mouseX - _firstButton.componentWidth - _middleButton.componentWidth / 2)
+					* (maxScrollPosition - minScrollPosition)
+					/ (componentWidth - _firstButton.componentWidth - _lastButton.componentWidth
+					- _middleButton.componentWidth);
 			}
 		}
 		
@@ -148,11 +158,17 @@ package SoMuchSpace.components.scrollbar
 			_middleButton.currentState = ButtonState.DOWN_STATE;
 			if (type == ScrollbarType.VERTICAL)
 			{
-				scrollPosition = (mouseY - (startMousePoint.y) - _firstButton.componentHeight) * (maxScrollPosition - minScrollPosition) / (componentHeight - _firstButton.componentHeight - _lastButton.componentHeight - _middleButton.componentHeight);
+				scrollPosition = (mouseY - startMousePoint.y - _firstButton.componentHeight)
+					* (maxScrollPosition - minScrollPosition) 
+					/ (componentHeight - _firstButton.componentHeight - _lastButton.componentHeight
+					- _middleButton.componentHeight);
 			}
 			else if (type == ScrollbarType.HORIZONTAL)
 			{
-				scrollPosition = (mouseX - (startMousePoint.x) - _firstButton.componentWidth) * (maxScrollPosition - minScrollPosition) / (componentWidth - _firstButton.componentWidth - _lastButton.componentWidth - _middleButton.componentWidth);
+				scrollPosition = (mouseX - startMousePoint.x - _firstButton.componentWidth)
+					* (maxScrollPosition - minScrollPosition)
+					/ (componentWidth - _firstButton.componentWidth - _lastButton.componentWidth 
+					- _middleButton.componentWidth);
 			}
 		}
 		
@@ -161,13 +177,18 @@ package SoMuchSpace.components.scrollbar
 			stage.removeEventListener(MouseEvent.MOUSE_MOVE, onSliderDrag);
 			stage.removeEventListener(MouseEvent.MOUSE_UP, onSliderRelease);
 			stage.removeEventListener(Event.ENTER_FRAME, onScrollTimerTick);
-			if (stage.getObjectsUnderPoint(new Point(stage.mouseX, stage.mouseY)).indexOf(_middleButton) < 0)
+			
+			var mousePosition:Point = new Point(stage.mouseX, stage.mouseY);
+			var objectsUnderMouse:Array = stage.getObjectsUnderPoint(mousePosition);
+			var mouseOverMiddleButton:Boolean = objectsUnderMouse.indexOf(_middleButton) < 0;
+			
+			if (mouseOverMiddleButton)
 			{
-				_middleButton.currentState = ButtonState.UP_STATE;
+				_middleButton.currentState = ButtonState.OVER_STATE;
 			}
 			else
 			{
-				_middleButton.currentState = ButtonState.OVER_STATE;
+				_middleButton.currentState = ButtonState.UP_STATE;
 			}
 		}
 		
@@ -235,14 +256,17 @@ package SoMuchSpace.components.scrollbar
 				_middleButton.componentWidth = componentWidth;
 				backgroundButton.y = _firstButton.y + _firstButton.componentHeight;
 				backgroundButton.graphics.drawRect(0, 0, componentWidth, _lastButton.y);
-				//var newHeight:Number = (height - _firstButton.height - _lastButton.height)/(maxScrollPosition - minScrollPosition);
-				var newHeight:Number = Math.round((componentHeight - _firstButton.componentHeight - _lastButton.componentHeight) / wholeSize * (wholeSize - maxScrollPosition + minScrollPosition));
+				var newHeight:Number = Math.round((componentHeight - _firstButton.componentHeight
+					- _lastButton.componentHeight) / wholeSize
+					* (wholeSize - maxScrollPosition + minScrollPosition));
 				
-				if (componentHeight - _firstButton.componentHeight - _lastButton.componentHeight <= _middleButton.minHeight)
+				if (componentHeight - _firstButton.componentHeight - _lastButton.componentHeight
+					<= _middleButton.minHeight)
 				{
 					_middleButton.visible = false;
 				}
-				else if (newHeight >= componentHeight - _firstButton.componentHeight - _lastButton.componentHeight)
+				else if (newHeight 
+					>= componentHeight - _firstButton.componentHeight - _lastButton.componentHeight)
 				{
 					_middleButton.visible = false;
 					_firstButton.enabled = false;
@@ -256,7 +280,11 @@ package SoMuchSpace.components.scrollbar
 					_firstButton.enabled = true;
 					_lastButton.enabled = true;
 					_middleButton.componentHeight = newHeight + newHeight % 2;
-					_middleButton.y = Math.round(_firstButton.componentHeight + (componentHeight - _firstButton.componentHeight - _lastButton.componentHeight - _middleButton.componentHeight) / (maxScrollPosition - minScrollPosition) * (scrollPosition - minScrollPosition));
+					_middleButton.y = Math.round(_firstButton.componentHeight
+						+ (componentHeight - _firstButton.componentHeight
+						- _lastButton.componentHeight - _middleButton.componentHeight)
+						/ (maxScrollPosition - minScrollPosition)
+						* (scrollPosition - minScrollPosition));
 				}
 			}
 			else if (type == ScrollbarType.HORIZONTAL)
@@ -266,12 +294,17 @@ package SoMuchSpace.components.scrollbar
 				backgroundButton.x = _firstButton.x + _firstButton.componentWidth;
 				backgroundButton.graphics.drawRect(0, 0, _lastButton.x, componentHeight);
 				
-				var newWidth:Number = Math.round((componentWidth - _firstButton.componentWidth - _lastButton.componentWidth) / wholeSize * (wholeSize - maxScrollPosition + minScrollPosition));
-				if (componentWidth - _firstButton.componentWidth - _lastButton.componentWidth <= _middleButton.minWidth)
+				var newWidth:Number = Math.round((componentWidth - _firstButton.componentWidth
+					- _lastButton.componentWidth) / wholeSize
+					* (wholeSize - maxScrollPosition + minScrollPosition));
+					
+				if (componentWidth - _firstButton.componentWidth - _lastButton.componentWidth
+					<= _middleButton.minWidth)
 				{
 					_middleButton.visible = false;
 				}
-				else if (newWidth >= componentWidth - _firstButton.componentWidth - _lastButton.componentWidth)
+				else if (newWidth
+					>= componentWidth - _firstButton.componentWidth - _lastButton.componentWidth)
 				{
 					_middleButton.visible = false;
 					_firstButton.enabled = false;
@@ -285,7 +318,11 @@ package SoMuchSpace.components.scrollbar
 					_firstButton.enabled = true;
 					_lastButton.enabled = true;
 					_middleButton.componentWidth = newWidth + newWidth % 2;
-					_middleButton.x = Math.round(_firstButton.componentWidth + (componentWidth - _firstButton.componentWidth - _lastButton.componentWidth - _middleButton.componentWidth) / (maxScrollPosition - minScrollPosition) * (scrollPosition - minScrollPosition));
+					_middleButton.x = Math.round(_firstButton.componentWidth 
+						+ (componentWidth - _firstButton.componentWidth 
+						- _lastButton.componentWidth - _middleButton.componentWidth) 
+						/ (maxScrollPosition - minScrollPosition) 
+						* (scrollPosition - minScrollPosition));
 				}
 			}
 			_middleButton.cancelInvalidation();

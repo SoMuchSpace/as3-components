@@ -11,7 +11,8 @@ package SoMuchSpace.components.events
 		public static const DRAW:String = "drawComponent"
 		public static const MOVE:String = "moveComponent";
 		
-		public function ComponentEvent(type:String, bubbles:Boolean = false, cancelable:Boolean=false) 
+		public function ComponentEvent(type:String, bubbles:Boolean = false, 
+										cancelable:Boolean=false) 
 		{
 			super(type, bubbles, cancelable);
 		}

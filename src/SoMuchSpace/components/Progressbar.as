@@ -38,7 +38,8 @@ package SoMuchSpace.components
 			var w:uint = currentValue/totalValue * (componentWidth - 0);
 			var matrix:Matrix = new Matrix();
 			matrix.createGradientBox(w, componentHeight - 0, Math.PI/2);
-			graphics.beginGradientFill(GradientType.LINEAR, [0xbad8f0, 0x3f9ee7], [1, 1], [0x00, 0xFF], matrix);
+			graphics.beginGradientFill(GradientType.LINEAR, [0xbad8f0, 0x3f9ee7],
+				[1, 1], [0x00, 0xFF], matrix);
 			graphics.drawRoundRect(0, 0, w, componentHeight - 0, 5, 5);
 			graphics.endFill();
 		}

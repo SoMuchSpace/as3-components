@@ -30,7 +30,8 @@ package SoMuchSpace.components.utils.mouseCursor
 			addCursor(CustomMouseCursor.OPEN_HAND, bitmap.bitmapData, new Point(9, 9));
 		}
 		
-		private function addCursor(cursorName:String, cursor:BitmapData, hotSpot:Point=null):void
+		private function addCursor(cursorName:String, cursor:BitmapData, 
+			hotSpot:Point=null):void
 		{
 			var bitmapDataVector:Vector.<BitmapData> = new Vector.<BitmapData>();
 			bitmapDataVector.push(cursor);
@@ -38,7 +39,9 @@ package SoMuchSpace.components.utils.mouseCursor
 			addAnimatedCursor(cursorName, bitmapDataVector, 0, hotSpot);
 		}
 		
-		private function addAnimatedCursor(cursorName:String, cursorVector:Vector.<BitmapData>, frameRate:int = 0, hotSpot:Point=null):void
+		private function addAnimatedCursor(cursorName:String, 
+			cursorVector:Vector.<BitmapData>, frameRate:int = 0,
+			hotSpot:Point=null):void
 		{
 			if (hotSpot == null)
 			{
