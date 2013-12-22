@@ -5,6 +5,7 @@ package SoMuchSpace.components.buttons
 	import flash.text.TextFieldAutoSize;
 	import flash.text.TextFormat;
 	import SoMuchSpace.components.BaseButton;
+	import SoMuchSpace.components.ComponentUtils;
 	import SoMuchSpace.components.fonts.ComponentFont;
 	
 	/**
@@ -20,12 +21,8 @@ package SoMuchSpace.components.buttons
 			haveDownState = true;
 			haveOverState = true;
 			
-			_textField = new TextField();
-			_textField.autoSize = TextFieldAutoSize.LEFT;
+			_textField = ComponentUtils.getTunedTextField(14, 0xFFFFFF);
 			_textField.mouseEnabled = false;
-			_textField.defaultTextFormat = new TextFormat(ComponentFont.OPEN_SANS, 14, 0xFFFFFF);
-			_textField.embedFonts = true;
-			//label.antiAliasType = AntiAliasType.ADVANCED;
 			addChild(_textField);
 			
 			_componentWidth = 80;

@@ -1,5 +1,9 @@
 package SoMuchSpace.components 
 {
+	import flash.text.TextField;
+	import flash.text.TextFieldAutoSize;
+	import flash.text.TextFormat;
+	import SoMuchSpace.components.fonts.ComponentFont;
 	/**
 	 * ...
 	 * @author SoMuchSpace
@@ -16,6 +20,15 @@ package SoMuchSpace.components
 			return component.y + component.componentHeight + offset;
 		}
 		
+		public static function getTunedTextField(size:int = 14, color:Number = 0x000000, autoSize:String = "left"):TextField
+		{
+			var newTextField:TextField = new TextField();
+			newTextField.autoSize = autoSize;
+			newTextField.defaultTextFormat = new TextFormat(ComponentFont.OPEN_SANS, size, color);
+			newTextField.embedFonts = true;
+			//label.antiAliasType = AntiAliasType.ADVANCED;
+			return newTextField;
+		}
 	}
 
 }

@@ -2,6 +2,7 @@ package SoMuchSpace.components
 {
 	import flash.events.Event;
 	import flash.text.TextField;
+	import flash.text.TextFieldAutoSize;
 	import flash.text.TextFieldType;
 	import flash.text.TextFormat;
 	import SoMuchSpace.components.fonts.ComponentFont;
@@ -11,16 +12,15 @@ package SoMuchSpace.components
 	 */
 	public class TextInput extends Component
 	{
-		private var _textField:TextField = new TextField();
+		private var _textField:TextField;
 		
 		public function TextInput(text:String = "") 
 		{
-			_textField.defaultTextFormat = new TextFormat(ComponentFont.OPEN_SANS, 10, 0x000000);
+			_textField = ComponentUtils.getTunedTextField(14, 0x000000, TextFieldAutoSize.NONE);
 			_textField.background = true;
 			_textField.border = true;
 			_textField.backgroundColor = 0xFFFFFF;
 			_textField.borderColor = 0xA3A3A3;
-			_textField.selectable = true;
 			_textField.type = TextFieldType.INPUT;
 			
 			this.text = text;

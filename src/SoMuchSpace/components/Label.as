@@ -10,14 +10,11 @@ package SoMuchSpace.components
 	 */
 	public class Label extends Component
 	{
-		private var _textField:TextField = new TextField();
+		private var _textField:TextField;
 		
 		public function Label(text:String = "") 
 		{
-			_textField.defaultTextFormat = new TextFormat(ComponentFont.OPEN_SANS, 20, 0);
-			_textField.embedFonts = true;
-			//_textField.antiAliasType = AntiAliasType.ADVANCED;
-			_textField.autoSize = TextFieldAutoSize.LEFT;
+			_textField = ComponentUtils.getTunedTextField();
 			_textField.selectable = false;
 			addChild(_textField);
 			
