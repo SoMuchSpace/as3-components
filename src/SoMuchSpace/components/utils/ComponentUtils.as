@@ -1,5 +1,6 @@
 package SoMuchSpace.components.utils 
 {
+	import flash.text.AntiAliasType;
 	import flash.text.TextField;
 	import flash.text.TextFormat;
 	import SoMuchSpace.components.Component;
@@ -23,10 +24,10 @@ package SoMuchSpace.components.utils
 		public static function getTunedTextField(size:int = 14, color:Number = 0x000000, autoSize:String = "left"):TextField
 		{
 			var newTextField:TextField = new TextField();
-			newTextField.autoSize = autoSize;
-			newTextField.defaultTextFormat = new TextFormat(ComponentFont.OPEN_SANS, size, color);
 			newTextField.embedFonts = true;
-			//label.antiAliasType = AntiAliasType.ADVANCED;
+			newTextField.autoSize = autoSize;
+			newTextField.defaultTextFormat = new TextFormat(ComponentFont.OPEN_SANS_LIGHT, size, color);
+			newTextField.antiAliasType = AntiAliasType.ADVANCED;
 			return newTextField;
 			
 		}

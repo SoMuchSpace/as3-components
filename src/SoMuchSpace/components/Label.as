@@ -15,7 +15,7 @@ package SoMuchSpace.components
 		
 		public function Label(text:String = "") 
 		{
-			_textField = ComponentUtils.getTunedTextField();
+			_textField = ComponentUtils.getTunedTextField(18);
 			_textField.selectable = false;
 			addChild(_textField);
 			

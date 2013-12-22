@@ -16,7 +16,7 @@ package SoMuchSpace.components.buttons
 			haveDownState = true;
 			haveOverState = true;
 			
-			_textField = ComponentUtils.getTunedTextField(14, 0xFFFFFF);
+			_textField = ComponentUtils.getTunedTextField(18, 0xFFFFFF);
 			_textField.mouseEnabled = false;
 			addChild(_textField);
 			
