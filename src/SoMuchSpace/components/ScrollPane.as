@@ -44,9 +44,17 @@ package SoMuchSpace.components
 			{
 				createYScrollbar();
 			}
+			
+			container.addEventListener(Event.ADDED, onChildAddedToContainer);
+			
 			// TODO: вложенные крулпане
 			hitSprite.addEventListener(MouseEvent.MOUSE_WHEEL, onMouseWheel);
 			container.addEventListener(MouseEvent.MOUSE_WHEEL, onMouseWheel);
+		}
+		
+		private function onChildAddedToContainer(e:Event):void 
+		{
+			invalidate();
 		}
 		
 		private function createXScrollBar():void
