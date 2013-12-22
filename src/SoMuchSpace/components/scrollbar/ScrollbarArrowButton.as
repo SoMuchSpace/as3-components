@@ -26,8 +26,8 @@ package SoMuchSpace.components.scrollbar
 			{
 				setComponentSize(15, 14);
 			}
-			over = true;
-			down = true;
+			haveOverState = true;
+			haveDownState = true;
 			
 		}
 		

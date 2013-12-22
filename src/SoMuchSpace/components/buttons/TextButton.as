@@ -13,40 +13,32 @@ package SoMuchSpace.components.buttons
 	 */
 	public class TextButton extends BaseButton
 	{
-		private var _text:String;
-		private var _label:TextField;
+		private var _textField:TextField;
 		
 		public function TextButton(text:String) 
 		{
-			super();
+			haveDownState = true;
+			haveOverState = true;
 			
-			_text = text;
-			
-			down = true;
-			
-			_label = new TextField();
-			_label.autoSize = TextFieldAutoSize.LEFT;
-			_label.mouseEnabled = false;
-			_label.defaultTextFormat = new TextFormat(ComponentFont.OPEN_SANS, 14, 0xFFFFFF);
-			_label.embedFonts = true;
+			_textField = new TextField();
+			_textField.autoSize = TextFieldAutoSize.LEFT;
+			_textField.mouseEnabled = false;
+			_textField.defaultTextFormat = new TextFormat(ComponentFont.OPEN_SANS, 14, 0xFFFFFF);
+			_textField.embedFonts = true;
 			//label.antiAliasType = AntiAliasType.ADVANCED;
-			addChild(_label);
+			addChild(_textField);
 			
 			_componentWidth = 80;
 			_componentHeight = 23;
+			
+			this.text = text;
 		}
 		
 		override public function draw():void 
 		{
-			_label.text = _text;
-			//label.setTextFormat(new TextFormat("Verdana", 11, 0xFFFFFF));
-			
-			minWidth = _label.width + 10;
-			
-			_label.x = Math.round((componentWidth - _label.width) / 2);
-			_label.y = Math.round((componentHeight - _label.height) / 2);
 			super.draw();
-			//upView();
+			_textField.x = Math.round((componentWidth - _textField.width) / 2);
+			_textField.y = Math.round((componentHeight - _textField.height) / 2);
 		}
 		
 		override protected function upView():void 
@@ -54,6 +46,15 @@ package SoMuchSpace.components.buttons
 			graphics.clear();
 			//graphics.lineStyle(1, 0x21A4D2);
 			graphics.beginFill(0x2EB3DE);
+			graphics.drawRect(0, 0, componentWidth, componentHeight);
+			graphics.endFill();
+		}
+		
+		override protected function overView():void 
+		{
+			graphics.clear();
+			//graphics.lineStyle(1, 0x1B84A7);
+			graphics.beginFill(0x45BBE2);
 			graphics.drawRect(0, 0, componentWidth, componentHeight);
 			graphics.endFill();
 		}
@@ -76,11 +77,13 @@ package SoMuchSpace.components.buttons
 			graphics.endFill();
 		}
 		
-		public function get text():String { return _text; }
+		public function get text():String { return _textField.text; }
 		
 		public function set text(value:String):void 
 		{
-			_text = value;
+			_textField.text = value;
+			minHeight = _textField.height + 10;
+			minWidth = _textField.width + 10;
 			draw();
 		}
 		

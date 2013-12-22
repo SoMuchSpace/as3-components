@@ -15,16 +15,19 @@ package SoMuchSpace.components
 		public static const TOGGLED_STATE:String = "toggledState";
 		public static const NOT_ENABLED_STATE:String = "notEnabledState";
 		
-		private var _toggle:Boolean = false;
-		private var _over:Boolean = false;
-		private var _down:Boolean = false;
-		private var _selectedOver:Boolean = false;
+		private var _canToggle:Boolean = false;
 		
-		private var _selected:Boolean = false;
+		private var _haveOverState:Boolean = false;
+		private var _haveDownState:Boolean = false;
+		private var _haveSelectedOverState:Boolean = false;
+		private var _haveToggledState:Boolean = false;
 		
-		private var _state:String = UP_STATE;
-		private var _pressed:Boolean = false;
-		private var _overed:Boolean = false;
+		private var _toggled:Boolean = false;
+		
+		private var _cuttentState:String = UP_STATE;
+		
+		private var _mouseIsDown:Boolean = false;
+		private var _mouseIsOver:Boolean = false;
 		
 		/**
 		 * Создает объект BaseButton. По умолчанию размер компонента 50x20.
@@ -39,33 +42,33 @@ package SoMuchSpace.components
 		
 		private function rollOverHandler(e:MouseEvent):void 
 		{
-			_overed = true;
-			if (toggle && selected)
+			_mouseIsOver = true;
+			if (canToggle && toggled)
 			{
-				if (_selectedOver && !_pressed)
+				if (_haveSelectedOverState && !_mouseIsDown)
 				{
-					state = SELECTED_OVER_STATE;
+					currentState = SELECTED_OVER_STATE;
 				}
 				else
 				{
-					state = DOWN_STATE;
+					currentState = DOWN_STATE;
 				}
 			}
 			else
 			{
-				if (_pressed)
+				if (_mouseIsDown)
 				{
-					state = DOWN_STATE;
+					currentState = DOWN_STATE;
 				}
 				else
 				{
-					if (_over)
+					if (_haveOverState)
 					{
-						state = OVER_STATE;
+						currentState = OVER_STATE;
 					}
 					else
 					{
-						state = UP_STATE;
+						currentState = UP_STATE;
 					}
 				}
 			}
@@ -77,89 +80,87 @@ package SoMuchSpace.components
 		{
 			removeEventListener(MouseEvent.MOUSE_DOWN, mouseDownHandler);
 			removeEventListener(MouseEvent.ROLL_OUT, rollOutHandler);
-			_overed = false;
-			if (toggle)
+			_mouseIsOver = false;
+			if (canToggle)
 			{
-				if (selected)
+				if (toggled)
 				{
-					state = DOWN_STATE;
+					currentState = DOWN_STATE;
 				}
 				else
 				{
-					state = UP_STATE;
+					currentState = UP_STATE;
 				}
 			}
 			else
 			{
-				state = UP_STATE;
+				currentState = UP_STATE;
 			}
 		}
 		
 		private function mouseDownHandler(e:MouseEvent):void 
 		{
-			_pressed = true;
-			state = DOWN_STATE;
+			_mouseIsDown = true;
+			currentState = DOWN_STATE;
 			stage.addEventListener(MouseEvent.MOUSE_UP, mouseUpHandler);
 		}
 		
 		private function mouseUpHandler(e:MouseEvent):void 
 		{
 			stage.removeEventListener(MouseEvent.MOUSE_UP, mouseUpHandler);
-			_pressed = false;
-			if (_overed && toggle)
+			_mouseIsDown = false;
+			if (_mouseIsOver && canToggle)
 			{
-				selected = !selected;
+				toggled = !toggled;
 			}
-			if (toggle && _selected)
+			if (canToggle && _toggled)
 			{
-				if (_overed && _selectedOver)
+				if (_mouseIsOver && _haveSelectedOverState)
 				{
-					state = SELECTED_OVER_STATE;
+					currentState = SELECTED_OVER_STATE;
 				}
 				else
 				{
-					state = DOWN_STATE;
+					currentState = TOGGLED_STATE;
 				}
 			}
 			else
 			{
-				if (_overed && _over)
+				if (_mouseIsOver && _haveOverState)
 				{
-					state = OVER_STATE;
+					currentState = OVER_STATE;
 				}
 				else
 				{
-					state = UP_STATE;
+					currentState = UP_STATE;
 				}
 			}
 		}
 		
 		override public function draw():void 
 		{
-			super.draw();
-			if (state == UP_STATE)
+			switch (currentState) 
 			{
+				case UP_STATE:
+					upView();
+					break;
+				case OVER_STATE:
+					overView();
+					break;
+				case DOWN_STATE:
+					downView();
+					break;
+				case TOGGLED_STATE:
+					toggledView();
+					break;
+				case SELECTED_OVER_STATE:
+					selectedOverView();
+					break;
+				case NOT_ENABLED_STATE:
+					notEnabledView();
+					break;
+				default:
 				upView();
-			}
-			else if(state == OVER_STATE)
-			{
-				overView();
-			}
-			else if (state == DOWN_STATE)
-			{
-				downView();
-			}
-			else if (state == TOGGLED_STATE)
-			{
-				toggledView();
-			}
-			else if (state == SELECTED_OVER_STATE)
-			{
-				selectedOverView();
-			}
-			else if (state == NOT_ENABLED_STATE)
-			{
-				notEnabledView();
 			}
 		}
 		
@@ -239,11 +240,11 @@ package SoMuchSpace.components
 			{
 				if (value)
 				{
-					state = UP_STATE;
+					currentState = UP_STATE;
 				}
 				else
 				{
-					state = NOT_ENABLED_STATE;
+					currentState = NOT_ENABLED_STATE;
 				}
 			}
 			super.enabled = value;
@@ -252,33 +253,32 @@ package SoMuchSpace.components
 		/**
 		 * Залипает кнопка при нажатии или нет.
 		 */
-		public function get toggle():Boolean { return _toggle; }
+		public function get canToggle():Boolean { return _canToggle; }
 		
-		public function set toggle(value:Boolean):void 
+		public function set canToggle(value:Boolean):void 
 		{
-			_toggle = value;
+			_canToggle = value;
 		}
 		
 		/**
 		 * Нажата кнопка или нет.
 		 */
-		public function get selected():Boolean { return _selected; }
+		public function get toggled():Boolean { return _toggled; }
 		
-		public function set selected(value:Boolean):void 
+		public function set toggled(value:Boolean):void 
 		{
-			if (_toggle && selected != value)
+			if (_canToggle && toggled != value)
 			{
-				
 				if (value)
 				{
-					_selected = value;
-					state = DOWN_STATE;
+					_toggled = value;
+					currentState = DOWN_STATE;
 					
 				}
 				else
 				{
-					_selected = value;
-					state = UP_STATE;
+					_toggled = value;
+					currentState = UP_STATE;
 					
 				}
 				dispatchEvent(new Event(Event.SELECT));
@@ -289,42 +289,42 @@ package SoMuchSpace.components
 		/**
 		 * Реагирует ли кнопка на наведение на нее курсора
 		 */
-		public function get over():Boolean { return _over; }
+		public function get haveOverState():Boolean { return _haveOverState; }
 		
-		public function set over(value:Boolean):void 
+		public function set haveOverState(value:Boolean):void 
 		{
-			_over = value;
+			_haveOverState = value;
 		}
 		
 		/**
 		 * Реагирует ли кнопка на нажатие на нее
 		 */
-		public function get down():Boolean { return _down; }
+		public function get haveDownState():Boolean { return _haveDownState; }
 		
-		public function set down(value:Boolean):void 
+		public function set haveDownState(value:Boolean):void 
 		{
-			_down = value;
+			_haveDownState = value;
 		}
 		
 		/**
 		 * Изменяет ли свой вид кнопка при наведении на нее курсора в нажатом состоянии
 		 */
-		public function get selectedOver():Boolean { return _selectedOver; }
+		public function get haveSelectedOverState():Boolean { return _haveSelectedOverState; }
 		
-		public function set selectedOver(value:Boolean):void 
+		public function set haveSelectedOverState(value:Boolean):void 
 		{
-			_selectedOver = value;
+			_haveSelectedOverState = value;
 		}
 		
 		/**
 		 * Текущее состояние кнопки
 		 */
-		public function get state():String { return _state; }
+		public function get currentState():String { return _cuttentState; }
 		
-		public function set state(value:String):void 
+		public function set currentState(value:String):void 
 		{
-			_state = value;
-			invalidate();
+			_cuttentState = value;
+			draw();
 		}
 		
 	}

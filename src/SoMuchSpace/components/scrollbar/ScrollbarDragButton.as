@@ -25,8 +25,8 @@ package SoMuchSpace.components.scrollbar
 				setComponentSize(83, 14);
 				minWidth = 8;
 			}
-			over = true;
-			down = true;
+			haveOverState = true;
+			haveDownState = true;
 		}
 		
 		override protected function upView():void 
