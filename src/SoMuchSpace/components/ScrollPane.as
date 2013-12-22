@@ -1,19 +1,19 @@
-package SoMuchSpace.components 
+package SoMuchSpace.components
 {
 	import flash.display.Sprite;
 	import flash.events.Event;
 	import flash.events.MouseEvent;
 	import flash.geom.Rectangle;
 	import SoMuchSpace.components.scrollbar.Scrollbar;
+	import SoMuchSpace.components.scrollbar.ScrollbarDisplayPolicy;
+	import SoMuchSpace.components.scrollbar.ScrollbarType;
+	
 	/**
 	 * ...
 	 * @author SoMuchSpace
 	 */
 	public class ScrollPane extends Panel
 	{
-		public static const SCROLLBAR_ALWAYS:String = "scrollbarAlways";
-		public static const SCROLLBAR_AS_NEEDED:String = "scrollbarAsNeeded";
-		public static const SCROLLBAR_NEVER:String = "scrollbarNever";
 		
 		private var _xScrollbar:Scrollbar;
 		private var _yScrollbar:Scrollbar;
@@ -23,7 +23,7 @@ package SoMuchSpace.components
 		
 		private var hitSprite:Sprite = new Sprite();
 		
-		public function ScrollPane(verticalScrollbarDisplayPolicy:String = "scrollbarAsNeeded", horizontalScrollbarDisplayPolicy:String = "scrollbarAsNeeded") 
+		public function ScrollPane(verticalScrollbarDisplayPolicy:String = "scrollbarAsNeeded", horizontalScrollbarDisplayPolicy:String = "scrollbarAsNeeded")
 		{
 			super();
 			
@@ -36,11 +36,11 @@ package SoMuchSpace.components
 			_componentWidth = 100;
 			_componentHeight = 100;
 			
-			if (_xScrollbarPolicy == SCROLLBAR_ALWAYS)
+			if (_xScrollbarPolicy == ScrollbarDisplayPolicy.SCROLLBAR_ALWAYS)
 			{
 				createXScrollBar();
 			}
-			if (_yScrollbarPolicy == SCROLLBAR_ALWAYS)
+			if (_yScrollbarPolicy == ScrollbarDisplayPolicy.SCROLLBAR_ALWAYS)
 			{
 				createYScrollbar();
 			}
@@ -53,7 +53,7 @@ package SoMuchSpace.components
 		{
 			if (!_xScrollbar)
 			{
-				_xScrollbar = new Scrollbar(Scrollbar.HORIZONTAL, 1, 0, 0, false);
+				_xScrollbar = new Scrollbar(ScrollbarType.HORIZONTAL, 1, 0, 0, false);
 			}
 			addChild(xScrollbar);
 			xScrollbar.addEventListener(Event.CHANGE, onScrollbarScrollPositionChanged);
@@ -63,13 +63,13 @@ package SoMuchSpace.components
 		{
 			if (!_yScrollbar)
 			{
-				_yScrollbar = new Scrollbar(Scrollbar.VERTICAL, 1, 0, 0, false);
+				_yScrollbar = new Scrollbar(ScrollbarType.VERTICAL, 1, 0, 0, false);
 			}
 			addChild(yScrollbar);
 			yScrollbar.addEventListener(Event.CHANGE, onScrollbarScrollPositionChanged);
 		}
 		
-		private function onScrollbarScrollPositionChanged(e:Event):void 
+		private function onScrollbarScrollPositionChanged(e:Event):void
 		{
 			if (xScrollbar)
 			{
@@ -89,7 +89,7 @@ package SoMuchSpace.components
 			}
 		}
 		
-		override public function draw():void 
+		override public function draw():void
 		{
 			super.draw();
 			
@@ -101,9 +101,9 @@ package SoMuchSpace.components
 			var containerWidth:Number = containerRect.x + containerRect.width;
 			var containerHeight:Number = containerRect.y + containerRect.height;
 			
-			if (_xScrollbarPolicy == SCROLLBAR_AS_NEEDED)
+			if (_xScrollbarPolicy == ScrollbarDisplayPolicy.SCROLLBAR_AS_NEEDED)
 			{
-				var cWidth:Number=maskWidth;
+				var cWidth:Number = maskWidth;
 				if (containerWidth <= cWidth)
 				{
 					if (xScrollbar != null)
@@ -122,9 +122,9 @@ package SoMuchSpace.components
 					}
 				}
 			}
-			if (_yScrollbarPolicy == SCROLLBAR_AS_NEEDED)
+			if (_yScrollbarPolicy == ScrollbarDisplayPolicy.SCROLLBAR_AS_NEEDED)
 			{
-				var cHeight:Number=maskHeight;
+				var cHeight:Number = maskHeight;
 				if (containerHeight <= cHeight)
 				{
 					if (yScrollbar)
@@ -250,21 +250,27 @@ package SoMuchSpace.components
 			_yScrollbar = null;
 		}
 		
-		private function onMouseWheel(e:MouseEvent):void 
+		private function onMouseWheel(e:MouseEvent):void
 		{
 			if (yScrollbar && yScrollbar.enabled)
 			{
 				yScrollbar.scrollPosition -= yScrollbar.arrowsScrollSize * e.delta;
 			}
-			else if(xScrollbar && xScrollbar.enabled)
+			else if (xScrollbar && xScrollbar.enabled)
 			{
 				xScrollbar.scrollPosition -= xScrollbar.arrowsScrollSize * e.delta;
 			}
 		}
 		
-		public function get yScrollbar():Scrollbar { return _yScrollbar; }
+		public function get yScrollbar():Scrollbar
+		{
+			return _yScrollbar;
+		}
 		
-		public function get xScrollbar():Scrollbar { return _xScrollbar; }
+		public function get xScrollbar():Scrollbar
+		{
+			return _xScrollbar;
+		}
 	}
 
 }

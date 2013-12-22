@@ -16,10 +16,7 @@ package SoMuchSpace.components.scrollbar
 	 */
 	[Event(name="change", type="flash.events.Event")]
 	public class Scrollbar extends Container
-	{
-		public static const VERTICAL:String = "vertical";
-		public static const HORIZONTAL:String = "horizontal";
-		
+	{	
 		private var type:String;
 		
 		private var backgroundButton:Sprite;
@@ -43,7 +40,7 @@ package SoMuchSpace.components.scrollbar
 		
 		/**
 		 * Создает компонент Scrollbar
-		 * @param	type тип скруллбара: Scrollbar.VERTICAL или Scrollbar.HORIZONTAL
+		 * @param	type тип скруллбара: ScrollbarType.VERTICAL или ScrollbarType.HORIZONTAL
 		 * @param	viewportSize размер видимой области прокручиваемого объекта по нужной оси.
 		 * @param	minScrollPosition
 		 * @param	maxScrollPosition
@@ -60,7 +57,7 @@ package SoMuchSpace.components.scrollbar
 			_middleButton = new ScrollbarDragButton(type);
 			backgroundButton = new Sprite();
 			
-			if (type == VERTICAL)
+			if (type == ScrollbarType.VERTICAL)
 			{
 				_componentWidth = 14;
 				_componentHeight = 100;
@@ -68,7 +65,7 @@ package SoMuchSpace.components.scrollbar
 				_firstButton = new ScrollbarArrowButton(ScrollbarArrowButton.UP);
 				_lastButton = new ScrollbarArrowButton(ScrollbarArrowButton.DOWN);
 			}
-			else if (type == HORIZONTAL)
+			else if (type == ScrollbarType.HORIZONTAL)
 			{
 				_componentWidth = 100;
 				_componentHeight = 14;
@@ -80,12 +77,12 @@ package SoMuchSpace.components.scrollbar
 			
 			addChild(backgroundButton);
 			addChild(_middleButton);
-			if (type == VERTICAL)
+			if (type == ScrollbarType.VERTICAL)
 			{
 				addChild(_firstButton);
 				addChild(_lastButton);
 			}
-			else if (type == HORIZONTAL)
+			else if (type == ScrollbarType.HORIZONTAL)
 			{
 				addChild(_firstButton);
 				addChild(_lastButton);
@@ -108,11 +105,11 @@ package SoMuchSpace.components.scrollbar
 		
 		private function orientateToMousePosition():void
 		{
-			if (type == VERTICAL)
+			if (type == ScrollbarType.VERTICAL)
 			{
 				scrollPosition = (mouseY - firstButton.componentHeight - _middleButton.componentHeight / 2) * (maxScrollPosition - minScrollPosition) / (componentHeight - firstButton.componentHeight - lastButton.componentHeight - middleButton.componentHeight);
 			}
-			else if (type == HORIZONTAL)
+			else if (type == ScrollbarType.HORIZONTAL)
 			{
 				scrollPosition = (mouseX - firstButton.componentWidth - _middleButton.componentWidth / 2) * (maxScrollPosition - minScrollPosition) / (componentWidth - firstButton.componentWidth - lastButton.componentWidth - middleButton.componentWidth);
 			}
@@ -148,11 +145,11 @@ package SoMuchSpace.components.scrollbar
 		private function onSliderDrag(e:MouseEvent):void 
 		{
 			middleButton.currentState = ButtonState.DOWN_STATE;
-			if (type == VERTICAL)
+			if (type == ScrollbarType.VERTICAL)
 			{
 				scrollPosition = (mouseY - (startMousePoint.y) - firstButton.componentHeight) * (maxScrollPosition - minScrollPosition) / (componentHeight - firstButton.componentHeight - lastButton.componentHeight - middleButton.componentHeight);
 			}
-			else if (type == HORIZONTAL)
+			else if (type == ScrollbarType.HORIZONTAL)
 			{
 				scrollPosition = (mouseX-(startMousePoint.x)-firstButton.componentWidth) * (maxScrollPosition - minScrollPosition) / (componentWidth - firstButton.componentWidth - lastButton.componentWidth - middleButton.componentWidth);
 			}
@@ -231,7 +228,7 @@ package SoMuchSpace.components.scrollbar
 			graphics.endFill();
 			backgroundButton.graphics.clear();
 			backgroundButton.graphics.beginFill(0, 0);
-			if (type == VERTICAL)
+			if (type == ScrollbarType.VERTICAL)
 			{
 				lastButton.y = componentHeight - lastButton.componentHeight;
 				middleButton.componentWidth = componentWidth;
@@ -261,7 +258,7 @@ package SoMuchSpace.components.scrollbar
 					middleButton.y = Math.round(firstButton.componentHeight + (componentHeight - firstButton.componentHeight - lastButton.componentHeight - middleButton.componentHeight) / (maxScrollPosition - minScrollPosition) * (scrollPosition - minScrollPosition));
 				}
 			}
-			else if (type == HORIZONTAL)
+			else if (type == ScrollbarType.HORIZONTAL)
 			{
 				lastButton.x = componentWidth - lastButton.componentWidth;
 				middleButton.componentHeight = componentHeight;

@@ -9,18 +9,18 @@ package SoMuchSpace.components.scrollbar
 	internal class ScrollbarDragButton extends BaseButton
 	{
 		
-		private var type:String;
+		private var _scrollbarType:String;
 		
-		public function ScrollbarDragButton(type:String ) 
+		public function ScrollbarDragButton(scrollbarType:String ) 
 		{
 			super();
-			this.type = type;
-			if (type == Scrollbar.VERTICAL)
+			this._scrollbarType = scrollbarType;
+			if (scrollbarType == ScrollbarType.VERTICAL)
 			{
 				setComponentSize(14, 83);
 				minHeight = 8;
 			}
-			else (type == Scrollbar.HORIZONTAL)
+			else (scrollbarType == ScrollbarType.HORIZONTAL)
 			{
 				setComponentSize(83, 14);
 				minWidth = 8;
@@ -68,7 +68,7 @@ package SoMuchSpace.components.scrollbar
 		
 		private function drawLines():void
 		{
-			if (type == Scrollbar.HORIZONTAL)
+			if (_scrollbarType == ScrollbarType.HORIZONTAL)
 			{
 				graphics.moveTo(componentWidth / 2 - 2, 3);
 				graphics.lineTo(componentWidth / 2 - 2, componentHeight - 3);
@@ -77,7 +77,7 @@ package SoMuchSpace.components.scrollbar
 				graphics.moveTo(componentWidth / 2 + 2, 3);
 				graphics.lineTo(componentWidth / 2 + 2, componentHeight - 3);
 			}
-			else if (type == Scrollbar.VERTICAL)
+			else if (_scrollbarType == ScrollbarType.VERTICAL)
 			{
 				graphics.moveTo(3, componentHeight / 2 - 2);
 				graphics.lineTo(componentWidth - 3, componentHeight / 2 - 2);
