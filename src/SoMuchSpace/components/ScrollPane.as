@@ -140,6 +140,23 @@ package SoMuchSpace.components
 			var containerWidth:Number = containerRect.x + containerRect.width;
 			var containerHeight:Number = containerRect.y + containerRect.height;
 			
+			for (var i:int = 0; i < container.numChildren; i++) 
+			{
+				var displayObject:DisplayObject = container.getChildAt(i);
+				if (displayObject is Component)
+				{
+					var component:Component = displayObject as Component;
+					if (component.x + component.componentWidth > containerWidth)
+					{
+						containerWidth = component.x + component.componentWidth;
+					}
+					if (component.y + component.componentHeight > containerHeight)
+					{
+						containerHeight = component.y + component.componentHeight;
+					}
+				}
+			}
+			
 			if (_xScrollbarPolicy == ScrollbarDisplayPolicy.SCROLLBAR_AS_NEEDED)
 			{
 				var cWidth:Number = maskWidth;
@@ -181,25 +198,8 @@ package SoMuchSpace.components
 					}
 				}
 			}
-			if (yScrollbar)
-			{
-				
-				yScrollbar.x = componentWidth - yScrollbar.componentWidth;
-				maskWidth = yScrollbar.x;
-				
-				if (xScrollbar)
-				{
-					yScrollbar.componentHeight = componentHeight - xScrollbar.componentHeight;
-				}
-				else
-				{
-					yScrollbar.componentHeight = componentHeight;
-				}
-			}
-			else
-			{
-				maskWidth = componentWidth;
-			}
+			
+			
 			if (xScrollbar)
 			{
 				xScrollbar.y = componentHeight - xScrollbar.componentHeight;
@@ -218,6 +218,26 @@ package SoMuchSpace.components
 			{
 				maskHeight = componentHeight;
 			}
+			if (yScrollbar)
+			{
+				yScrollbar.x = componentWidth - yScrollbar.componentWidth;
+				maskWidth = yScrollbar.x;
+				
+				if (xScrollbar)
+				{
+					yScrollbar.componentHeight = componentHeight - xScrollbar.componentHeight;
+				}
+				else
+				{
+					yScrollbar.componentHeight = componentHeight;
+				}
+			}
+			else
+			{
+				maskWidth = componentWidth;
+			}
+			
+			
 			if (xScrollbar)
 			{
 				var prevMax:Number = xScrollbar.maxScrollPosition;
@@ -266,7 +286,8 @@ package SoMuchSpace.components
 				container.y = 0;
 			}
 			
-			container.setComponentSize(maskWidth, maskHeight);
+			container.minWidth = maskWidth;
+			container.minHeight = maskHeight;
 			
 			hitSprite.graphics.clear();
 			hitSprite.graphics.beginFill(0, 0);

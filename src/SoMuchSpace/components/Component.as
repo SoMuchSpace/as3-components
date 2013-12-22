@@ -39,6 +39,7 @@ package SoMuchSpace.components
 		{
 			init();
 			draw();
+			addEventListener(Event.REMOVED_FROM_STAGE, onRemovedFromStage);
 		}
 		
 		/**
@@ -46,11 +47,11 @@ package SoMuchSpace.components
 		 */
 		protected function init():void
 		{
-			addEventListener(Event.REMOVED_FROM_STAGE, onRemovedFromStage);
+			
 		}
 		
 		/**
-		 * Перерисовывает компонент.
+		 * Перерисовывает компонент. Не стоит использовать здесь метод invalidate() вообще
 		 */
 		public function draw():void
 		{
@@ -74,13 +75,18 @@ package SoMuchSpace.components
 		
 		public function invalidate():void
 		{
-			addEventListener(Event.ENTER_FRAME, onInvalidate);
+			addEventListener(Event.EXIT_FRAME, onInvalidate);
 		}
 		
 		private function onInvalidate(e:Event):void 
 		{
-			removeEventListener(Event.ENTER_FRAME, onInvalidate);
+			removeEventListener(Event.EXIT_FRAME, onInvalidate);
 			draw();
+		}
+		
+		public function cancelInvalidation():void
+		{
+			removeEventListener(Event.EXIT_FRAME, onInvalidate);
 		}
 		
 		public function get componentHeight():Number { return _componentHeight; }
@@ -93,11 +99,7 @@ package SoMuchSpace.components
 				return;
 			}
 			_componentHeight = newHeight;
-			if (stage)
-			{
-				draw();
-			}
-			//invalidate();
+			invalidate();
 			dispatchEvent(new ComponentEvent(ComponentEvent.RESIZE));
 		}
 		
@@ -125,11 +127,7 @@ package SoMuchSpace.components
 				return;
 			}
 			_componentWidth = newWidth;
-			if (stage)
-			{
-				draw();
-			}
-			//invalidate();
+			invalidate();
 			dispatchEvent(new ComponentEvent(ComponentEvent.RESIZE));
 		}
 		
@@ -162,11 +160,7 @@ package SoMuchSpace.components
 			}
 			_componentWidth = newWidth;
 			_componentHeight = newHeight;
-			if (stage)
-			{
-				draw();
-			}
-			//invalidate();
+			invalidate();
 			dispatchEvent(new ComponentEvent(ComponentEvent.RESIZE));
 		}
 		
@@ -223,6 +217,7 @@ package SoMuchSpace.components
 				mouseChildren = false;
 			}
 			_enabled = value;
+			invalidate();
 		}
 		
 		public function get minWidth():Number { return _minWidth; }
@@ -232,7 +227,7 @@ package SoMuchSpace.components
 			_minWidth = value;
 			if (componentWidth < minWidth)
 			{
-				_componentWidth = minWidth;
+				componentWidth = minWidth;
 			}
 		}
 		
@@ -243,7 +238,7 @@ package SoMuchSpace.components
 			_minHeight = value;
 			if (componentHeight < minHeight)
 			{
-				_componentHeight = minHeight;
+				componentHeight = minHeight;
 			}
 		}
 		
@@ -254,7 +249,7 @@ package SoMuchSpace.components
 			_maxWidth = value;
 			if (componentWidth > maxWidth)
 			{
-				_componentWidth = maxWidth;
+				componentWidth = maxWidth;
 			}
 		}
 		
@@ -265,7 +260,7 @@ package SoMuchSpace.components
 			_maxHeight = value;
 			if (componentHeight > maxHeight)
 			{
-				_componentHeight = maxHeight;
+				componentHeight = maxHeight;
 			}
 		}
 	}
