@@ -79,7 +79,6 @@ package SoMuchSpace.components
 			_textField.maxChars = value;
 		}
 		
-		
 	}
 
 }

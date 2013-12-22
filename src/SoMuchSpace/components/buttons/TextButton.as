@@ -14,7 +14,7 @@ package SoMuchSpace.components.buttons
 	public class TextButton extends BaseButton
 	{
 		private var _text:String;
-		private var label:TextField;
+		private var _label:TextField;
 		
 		public function TextButton(text:String) 
 		{
@@ -24,13 +24,13 @@ package SoMuchSpace.components.buttons
 			
 			down = true;
 			
-			label = new TextField();
-			label.autoSize = TextFieldAutoSize.LEFT;
-			label.mouseEnabled = false;
-			label.defaultTextFormat = new TextFormat(ComponentFont.OPEN_SANS, 14, 0xFFFFFF);
-			label.embedFonts = true;
+			_label = new TextField();
+			_label.autoSize = TextFieldAutoSize.LEFT;
+			_label.mouseEnabled = false;
+			_label.defaultTextFormat = new TextFormat(ComponentFont.OPEN_SANS, 14, 0xFFFFFF);
+			_label.embedFonts = true;
 			//label.antiAliasType = AntiAliasType.ADVANCED;
-			addChild(label);
+			addChild(_label);
 			
 			_componentWidth = 80;
 			_componentHeight = 23;
@@ -38,13 +38,13 @@ package SoMuchSpace.components.buttons
 		
 		override public function draw():void 
 		{
-			label.text = _text;
+			_label.text = _text;
 			//label.setTextFormat(new TextFormat("Verdana", 11, 0xFFFFFF));
 			
-			minWidth = label.width + 10;
+			minWidth = _label.width + 10;
 			
-			label.x = Math.round((componentWidth - label.width) / 2);
-			label.y = Math.round((componentHeight - label.height) / 2);
+			_label.x = Math.round((componentWidth - _label.width) / 2);
+			_label.y = Math.round((componentHeight - _label.height) / 2);
 			super.draw();
 			//upView();
 		}
@@ -83,7 +83,6 @@ package SoMuchSpace.components.buttons
 			_text = value;
 			draw();
 		}
-		
 		
 	}
 

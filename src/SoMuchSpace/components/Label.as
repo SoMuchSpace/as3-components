@@ -1,6 +1,5 @@
 package SoMuchSpace.components 
 {
-	import flash.text.AntiAliasType;
 	import flash.text.TextField;
 	import flash.text.TextFieldAutoSize;
 	import flash.text.TextFormat;
@@ -13,10 +12,9 @@ package SoMuchSpace.components
 	{
 		private var _textField:TextField = new TextField();
 		
-		
 		public function Label(text:String = "") 
 		{
-			_textField.defaultTextFormat = new TextFormat(ComponentFont.OPEN_SANS, 18, 0);
+			_textField.defaultTextFormat = new TextFormat(ComponentFont.OPEN_SANS, 20, 0);
 			_textField.embedFonts = true;
 			//_textField.antiAliasType = AntiAliasType.ADVANCED;
 			_textField.autoSize = TextFieldAutoSize.LEFT;
@@ -24,12 +22,6 @@ package SoMuchSpace.components
 			addChild(_textField);
 			
 			this.text = text;
-		}
-		
-		override public function draw():void 
-		{
-			minHeight = _textField.height;
-			minWidth = _textField.width;
 		}
 		
 		public function get text():String
@@ -40,9 +32,9 @@ package SoMuchSpace.components
 		public function set text(value:String):void 
 		{
 			_textField.text = value;
-			draw();
+			minHeight = _textField.height;
+			minWidth = _textField.width;
 		}
-		
 		
 	}
 

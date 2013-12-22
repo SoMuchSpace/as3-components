@@ -15,6 +15,7 @@ package SoMuchSpace.components
 		{
 			return component.y + component.componentHeight + offset;
 		}
+		
 	}
 
 }
