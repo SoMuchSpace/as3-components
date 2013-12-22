@@ -1,4 +1,4 @@
-package SoMuchSpace.components.mouse 
+package SoMuchSpace.components.utils.mouseCursor 
 {
 	/**
 	 * ...

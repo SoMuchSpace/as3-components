@@ -1,4 +1,4 @@
-package SoMuchSpace.components.mouse 
+package SoMuchSpace.components.utils.mouseCursor 
 {
 	import flash.display.Bitmap;
 	import flash.display.BitmapData;

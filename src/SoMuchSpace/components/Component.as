@@ -11,8 +11,6 @@ package SoMuchSpace.components
 	[Event(name="moveComponent", type="SoMuchSpace.components.events.ComponentEvent")]
 	public class Component extends Sprite
 	{
-		[Embed(source="fonts/open-sans/OpenSans-Regular.ttf", fontName = "Open Sans", embedAsCFF = "false")]
-		public var font:Class;
 		
 		protected var _componentHeight:Number = 0;
 		protected var _componentWidth:Number = 0;
