@@ -1,12 +1,7 @@
 package SoMuchSpace.components.buttons
 {
-	import flash.text.AntiAliasType;
 	import flash.text.TextField;
-	import flash.text.TextFieldAutoSize;
-	import flash.text.TextFormat;
-	import SoMuchSpace.components.BaseButton;
-	import SoMuchSpace.components.ComponentUtils;
-	import SoMuchSpace.components.fonts.ComponentFont;
+	import SoMuchSpace.components.utils.ComponentUtils;
 	
 	/**
 	 * ...

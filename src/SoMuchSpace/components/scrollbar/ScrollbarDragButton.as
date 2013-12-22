@@ -1,6 +1,6 @@
 package SoMuchSpace.components.scrollbar 
 {
-	import SoMuchSpace.components.BaseButton;
+	import SoMuchSpace.components.buttons.BaseButton;
 	
 	/**
 	 * ...

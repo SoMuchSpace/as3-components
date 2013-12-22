@@ -6,8 +6,8 @@ package SoMuchSpace.components.scrollbar
 	import flash.events.TimerEvent;
 	import flash.geom.Point;
 	import flash.utils.Timer;
-	import SoMuchSpace.components.BaseButton;
-	import SoMuchSpace.components.ButtonState;
+	import SoMuchSpace.components.buttons.BaseButton;
+	import SoMuchSpace.components.buttons.ButtonState;
 	import SoMuchSpace.components.Container;
 	
 	/**

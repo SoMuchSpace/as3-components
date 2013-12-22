@@ -1,7 +1,8 @@
-package SoMuchSpace.components 
+package SoMuchSpace.components.buttons 
 {
 	import flash.events.Event;
 	import flash.events.MouseEvent;
+	import SoMuchSpace.components.Component;
 	/**
 	 * Конмонент Конопка.
 	 * @author SoMuchSpace

@@ -1,8 +1,8 @@
-package SoMuchSpace.components 
+package SoMuchSpace.components.utils 
 {
 	import flash.text.TextField;
-	import flash.text.TextFieldAutoSize;
 	import flash.text.TextFormat;
+	import SoMuchSpace.components.Component;
 	import SoMuchSpace.components.fonts.ComponentFont;
 	/**
 	 * ...
@@ -28,6 +28,7 @@ package SoMuchSpace.components
 			newTextField.embedFonts = true;
 			//label.antiAliasType = AntiAliasType.ADVANCED;
 			return newTextField;
+			
 		}
 	}
 

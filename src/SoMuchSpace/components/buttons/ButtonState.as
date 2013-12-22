@@ -1,4 +1,4 @@
-package SoMuchSpace.components 
+package SoMuchSpace.components.buttons 
 {
 	/**
 	 * ...

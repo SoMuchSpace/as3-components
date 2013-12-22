@@ -4,6 +4,7 @@ package SoMuchSpace.components
 	import flash.text.TextFieldAutoSize;
 	import flash.text.TextFormat;
 	import SoMuchSpace.components.fonts.ComponentFont;
+	import SoMuchSpace.components.utils.ComponentUtils;
 	/**
 	 * ...
 	 * @author ...
