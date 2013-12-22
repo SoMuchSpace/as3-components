@@ -15,7 +15,8 @@ package SoMuchSpace.components
 		
 		public function InputText(text:String = "") 
 		{
-			_textField = ComponentUtils.getTunedTextField(18, 0x000000, TextFieldAutoSize.NONE);
+			_textField = ComponentUtils.getTunedTextField(18, 0x000000,
+				TextFieldAutoSize.NONE);
 			_textField.background = true;
 			_textField.border = true;
 			_textField.backgroundColor = 0xFFFFFF;
