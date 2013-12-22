@@ -25,8 +25,10 @@ package SoMuchSpace.components
 			
 			this.text = text;
 			
-			componentHeight = _textField.height;
-			componentWidth = _textField.width;
+			minHeight = Math.round(_textField.textHeight + 4);
+			minWidth = 4;
+			
+			componentWidth = 100;
 			
 			_textField.addEventListener(Event.CHANGE, onTextChange);
 			
