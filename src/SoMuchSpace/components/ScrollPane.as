@@ -1,9 +1,11 @@
 package SoMuchSpace.components
 {
+	import flash.display.DisplayObject;
 	import flash.display.Sprite;
 	import flash.events.Event;
 	import flash.events.MouseEvent;
 	import flash.geom.Rectangle;
+	import SoMuchSpace.components.events.ComponentEvent;
 	import SoMuchSpace.components.scrollbar.Scrollbar;
 	import SoMuchSpace.components.scrollbar.ScrollbarDisplayPolicy;
 	import SoMuchSpace.components.scrollbar.ScrollbarType;
@@ -46,22 +48,18 @@ package SoMuchSpace.components
 			}
 			
 			container.addEventListener(Event.ADDED, onChildAddedToContainer);
+			container.addEventListener(Event.REMOVED, onChildRemovedFromContainer);
 			
 			// TODO: вложенные крулпане
 			hitSprite.addEventListener(MouseEvent.MOUSE_WHEEL, onMouseWheel);
 			container.addEventListener(MouseEvent.MOUSE_WHEEL, onMouseWheel);
 		}
 		
-		private function onChildAddedToContainer(e:Event):void 
-		{
-			invalidate();
-		}
-		
 		private function createXScrollBar():void
 		{
 			if (!_xScrollbar)
 			{
-				_xScrollbar = new Scrollbar(ScrollbarType.HORIZONTAL, 1, 0, 0, false);
+				_xScrollbar = new Scrollbar(ScrollbarType.HORIZONTAL);
 			}
 			addChild(xScrollbar);
 			xScrollbar.addEventListener(Event.CHANGE, onScrollbarScrollPositionChanged);
@@ -71,7 +69,7 @@ package SoMuchSpace.components
 		{
 			if (!_yScrollbar)
 			{
-				_yScrollbar = new Scrollbar(ScrollbarType.VERTICAL, 1, 0, 0, false);
+				_yScrollbar = new Scrollbar(ScrollbarType.VERTICAL);
 			}
 			addChild(yScrollbar);
 			yScrollbar.addEventListener(Event.CHANGE, onScrollbarScrollPositionChanged);
@@ -96,6 +94,39 @@ package SoMuchSpace.components
 				container.y = 0;
 			}
 		}
+		
+		private function onChildAddedToContainer(e:Event):void 
+		{
+			invalidate();
+			
+			var displayObject:DisplayObject = e.target as DisplayObject;
+			if (displayObject is Component && displayObject.parent == container)
+			{
+				var component:Component = displayObject as Component;
+				component.addEventListener(ComponentEvent.MOVE, onChildChanged);
+				component.addEventListener(ComponentEvent.RESIZE, onChildChanged);
+			}
+		}
+		
+		private function onChildChanged(e:ComponentEvent):void 
+		{
+			invalidate();
+		}
+		
+		private function onChildRemovedFromContainer(e:Event):void 
+		{
+			invalidate();
+			
+			var displayObject:DisplayObject = e.target as DisplayObject;
+			if (displayObject is Component && displayObject.parent == container)
+			{
+				var component:Component = displayObject as Component;
+				component.removeEventListener(ComponentEvent.MOVE, onChildChanged);
+				component.removeEventListener(ComponentEvent.RESIZE, onChildChanged);
+			}
+		}
+		
+		
 		
 		override public function draw():void
 		{
