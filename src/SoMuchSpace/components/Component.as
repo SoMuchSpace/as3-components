@@ -63,7 +63,6 @@ package SoMuchSpace.components
 		
 		private function onRemovedFromStage(e:Event):void 
 		{
-			removeEventListener(Event.ADDED_TO_STAGE, onAddedToStage);
 			removeEventListener(Event.REMOVED_FROM_STAGE, onRemovedFromStage);
 			uninit();
 		}
