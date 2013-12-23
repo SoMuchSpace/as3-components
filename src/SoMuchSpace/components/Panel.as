@@ -18,17 +18,18 @@ package SoMuchSpace.components
 		private var _container:Container = new Container();
 		
 		/**
-		 * Создает объект Panel. По умолчанию размеры панели 100 на 100
+		 * Создает объект Panel.
 		 */
-		public function Panel() 
+		public function Panel(componentWidth:Number = 100, componentHeight:Number = 100) 
 		{
 			super();
 			_border = true;
 			_borderColor = 0xD0D0D0;
 			_background = true;
 			_backgroundColor = 0xF9F9F9;
-			_componentWidth = 100;
-			_componentHeight = 100;
+			
+			_componentWidth = componentWidth;
+			_componentHeight = componentHeight;
 			
 			addChild(_container);
 			addChild(_containerMask);

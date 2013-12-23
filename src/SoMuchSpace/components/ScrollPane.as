@@ -25,8 +25,9 @@ package SoMuchSpace.components
 		
 		private var hitSprite:Sprite = new Sprite();
 		
-		public function ScrollPane(verticalScrollbarDisplayPolicy:String = "scrollbarAsNeeded", 
-									horizontalScrollbarDisplayPolicy:String = "scrollbarAsNeeded")
+		public function ScrollPane(componentWidth:Number = 100, componentHeight:Number = 100,
+			verticalScrollbarDisplayPolicy:String = "scrollbarAsNeeded", 
+			horizontalScrollbarDisplayPolicy:String = "scrollbarAsNeeded")
 		{
 			super();
 			
@@ -36,8 +37,8 @@ package SoMuchSpace.components
 			addChild(hitSprite);
 			addChild(container);
 			
-			_componentWidth = 100;
-			_componentHeight = 100;
+			_componentWidth = componentWidth;
+			_componentHeight = componentHeight;
 			
 			if (_xScrollbarPolicy == ScrollbarDisplayPolicy.SCROLLBAR_ALWAYS)
 			{
