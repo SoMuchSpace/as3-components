@@ -38,7 +38,7 @@ package SoMuchSpace.components.scrollbar
 			graphics.lineStyle(1, 0x686868);
 			graphics.beginFill(0xFEFEFE);
 			
-			graphics.drawRect(.5, .5, componentWidth, componentHeight);
+			graphics.drawRect(0, 0, componentWidth, componentHeight);
 			graphics.endFill();
 			
 			graphics.lineStyle(1, 0x686868);
@@ -53,7 +53,7 @@ package SoMuchSpace.components.scrollbar
 			graphics.lineStyle(1, 0x686868);
 			graphics.beginFill(0xFEFEFE);
 			
-			graphics.drawRect(.5, .5, componentWidth, componentHeight);
+			graphics.drawRect(0, 0, componentWidth, componentHeight);
 			graphics.endFill();
 			
 			graphics.lineStyle(1, 0x686868);
@@ -67,7 +67,7 @@ package SoMuchSpace.components.scrollbar
 			graphics.lineStyle(1, 0x686868);
 			graphics.beginFill(0xE0E0E0);
 			
-			graphics.drawRect(.5, .5, componentWidth, componentHeight);
+			graphics.drawRect(0, 0, componentWidth, componentHeight);
 			graphics.endFill();
 			
 			graphics.lineStyle(1, 0x686868);
@@ -81,7 +81,7 @@ package SoMuchSpace.components.scrollbar
 			graphics.lineStyle(1, 0xA2A2A2);
 			graphics.beginFill(0xFCFCFC);
 			
-			graphics.drawRect(.5, .5, componentWidth, componentHeight);
+			graphics.drawRect(0, 0, componentWidth, componentHeight);
 			graphics.endFill();
 			
 			graphics.lineStyle(1, 0xBFBFBF);
