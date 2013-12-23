@@ -6,6 +6,7 @@ package SoMuchSpace.components
 	import flash.events.Event;
 	import flash.events.MouseEvent;
 	import flash.geom.Rectangle;
+	import flash.utils.getTimer;
 	import SoMuchSpace.components.events.ComponentEvent;
 	import SoMuchSpace.components.scrollbar.Scrollbar;
 	import SoMuchSpace.components.scrollbar.ScrollbarDisplayPolicy;
@@ -139,25 +140,34 @@ package SoMuchSpace.components
 			var maskWidth:Number = componentWidth;
 			var maskHeight:Number = componentHeight;
 			
-			var containerRect:Rectangle = container.getRect(container);
-			
-			var containerWidth:Number = containerRect.x + containerRect.width;
-			var containerHeight:Number = containerRect.y + containerRect.height;
+			var containerWidth:Number = 0;
+			var containerHeight:Number = 0;
 			
 			for (var i:int = 0; i < container.numChildren; i++) 
 			{
 				var displayObject:DisplayObject = container.getChildAt(i);
+				var displayObjectRight:Number = 0;
+				var displayObjectBottom:Number = 0;
 				if (displayObject is Component)
 				{
 					var component:Component = displayObject as Component;
-					if (component.x + component.componentWidth > containerWidth)
-					{
-						containerWidth = component.x + component.componentWidth;
-					}
-					if (component.y + component.componentHeight > containerHeight)
-					{
-						containerHeight = component.y + component.componentHeight;
-					}
+					displayObjectRight = component.x + component.componentWidth;
+					displayObjectBottom = component.y + component.componentHeight;
+					
+				}
+				else
+				{
+					var displayObjectVisibility:Rectangle = getVisibility(displayObject);
+					displayObjectRight = displayObjectVisibility.right;
+					displayObjectBottom = displayObjectVisibility.bottom;
+				}
+				if (displayObjectRight > containerWidth)
+				{
+					containerWidth = displayObjectRight;
+				}
+				if (displayObjectBottom > containerHeight)
+				{
+					containerHeight = displayObjectBottom;
 				}
 			}
 			
@@ -298,6 +308,61 @@ package SoMuchSpace.components
 			_hitSprite.graphics.drawRect(0, 0, maskWidth, maskHeight);
 			_hitSprite.graphics.endFill();
 			container.hitArea = _hitSprite;
+		}
+		
+		private function getVisibility(displayObject:DisplayObject):Rectangle
+		{
+			var visibility:Rectangle;
+			if (displayObject.parent == null) return new Rectangle();
+			if (displayObject is DisplayObjectContainer)
+			{
+				visibility = getChildVisibility(displayObject as DisplayObjectContainer, displayObject.parent);
+			}
+			else
+			{
+				visibility = displayObject.getBounds(displayObject.parent);
+			}
+			// Is the DisplayObject masked?
+			if (displayObject.mask != null)
+			{
+				visibility = visibility.intersection(displayObject.mask.getBounds(displayObject.parent));
+			}
+			// Is the DisplayObject partly or completely off-stage?
+			visibility = visibility.intersection(displayObject.stage.getBounds(displayObject.parent));
+			return visibility;
+		}
+		
+		private function getChildVisibility(displayObjectContainer:DisplayObjectContainer, target:DisplayObjectContainer):Rectangle
+		{
+			var visibility:Rectangle = new Rectangle();
+			var child:DisplayObject;
+			var childRect:Rectangle;
+			var i:uint;
+			
+			for (i = 1; i <= displayObjectContainer.numChildren; i++)
+			{
+				child = displayObjectContainer.getChildAt(i - 1);
+				if (child != null)
+				{
+					if (child.visible)
+					{
+						if (child is DisplayObjectContainer)
+						{
+							childRect = getChildVisibility(child as DisplayObjectContainer, target);
+						}
+						else
+						{
+							childRect = child.getBounds(target);
+						}
+						if (child.mask != null)
+						{
+							childRect = childRect.intersection(child.mask.getBounds(target));
+						}
+						visibility = visibility.union(childRect);
+					}
+				}
+			}
+			return visibility;
 		}
 		
 		private function deleteXScrollbar():void
