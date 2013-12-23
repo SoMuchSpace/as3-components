@@ -5,7 +5,7 @@ package SoMuchSpace.components
 	 * Компонент Панель.
 	 * @author SoMuchSpace
 	 */
-	public class Panel extends Container
+	public class Panel extends Component
 	{
 		protected var _containerMask:Sprite = new Sprite();
 		
@@ -23,6 +23,7 @@ package SoMuchSpace.components
 		public function Panel(componentWidth:Number = 100, componentHeight:Number = 100) 
 		{
 			super();
+			
 			_border = true;
 			_borderColor = 0xD0D0D0;
 			_background = true;
