@@ -38,8 +38,8 @@ package SoMuchSpace.components
 		
 		private function onAddedToStage(e:Event):void 
 		{
+			invalidate();
 			init();
-			draw();
 			addEventListener(Event.REMOVED_FROM_STAGE, onRemovedFromStage);
 		}
 		

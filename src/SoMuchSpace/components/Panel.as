@@ -66,7 +66,7 @@ package SoMuchSpace.components
 		public function set background(value:Boolean):void 
 		{
 			_background = value;
-			draw();
+			invalidate();
 		}
 		
 		public function get backgroundColor():Number { return _backgroundColor; }
@@ -74,7 +74,7 @@ package SoMuchSpace.components
 		public function set backgroundColor(value:Number):void 
 		{
 			_backgroundColor = value;
-			draw();
+			invalidate();
 		}
 		
 		public function get border():Boolean { return _border; }
@@ -82,7 +82,7 @@ package SoMuchSpace.components
 		public function set border(value:Boolean):void 
 		{
 			_border = value;
-			draw();
+			invalidate();
 		}
 		
 		public function get borderColor():Number { return _borderColor; }
@@ -90,7 +90,7 @@ package SoMuchSpace.components
 		public function set borderColor(value:Number):void 
 		{
 			_borderColor = value;
-			draw();
+			invalidate();
 		}
 		
 		public function get container():Container { return _container; }
