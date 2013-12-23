@@ -15,6 +15,7 @@ package SoMuchSpace.components
 		public function Progressbar() 
 		{
 			super();
+			mouseChildren = false;
 			setComponentSize(140, 10);
 		}
 		

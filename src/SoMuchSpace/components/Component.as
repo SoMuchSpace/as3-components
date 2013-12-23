@@ -31,8 +31,6 @@ package SoMuchSpace.components
 		 */
 		public function Component() 
 		{
-			mouseChildren = true;
-			mouseEnabled = true;
 			addEventListener(Event.ADDED_TO_STAGE, onAddedToStage);
 		}
 		

@@ -32,6 +32,7 @@ package SoMuchSpace.components.buttons
 			super();
 			_componentWidth = 50;
 			_componentHeight = 20;
+			mouseChildren = false;
 			addEventListener(MouseEvent.ROLL_OVER, rollOverHandler);
 		}
 		

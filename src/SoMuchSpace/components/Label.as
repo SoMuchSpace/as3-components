@@ -18,7 +18,7 @@ package SoMuchSpace.components
 			_textField = ComponentUtils.getTunedTextField(18);
 			_textField.selectable = false;
 			addChild(_textField);
-			
+			mouseChildren = false;
 			this.text = text;
 		}
 		
