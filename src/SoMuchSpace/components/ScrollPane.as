@@ -1,6 +1,7 @@
 package SoMuchSpace.components
 {
 	import flash.display.DisplayObject;
+	import flash.display.DisplayObjectContainer;
 	import flash.display.Sprite;
 	import flash.events.Event;
 	import flash.events.MouseEvent;
@@ -23,7 +24,9 @@ package SoMuchSpace.components
 		private var _xScrollbarPolicy:String;
 		private var _yScrollbarPolicy:String;
 		
-		private var hitSprite:Sprite = new Sprite();
+		private var _hitSprite:Sprite = new Sprite();
+		
+		public var scrollIfChildScrollPaneCant:Boolean = false;
 		
 		public function ScrollPane(componentWidth:Number = 100, componentHeight:Number = 100,
 			verticalScrollbarDisplayPolicy:String = "scrollbarAsNeeded", 
@@ -34,7 +37,7 @@ package SoMuchSpace.components
 			_xScrollbarPolicy = horizontalScrollbarDisplayPolicy;
 			_yScrollbarPolicy = verticalScrollbarDisplayPolicy;
 			
-			addChild(hitSprite);
+			addChild(_hitSprite);
 			addChild(container);
 			
 			_componentWidth = componentWidth;
@@ -52,9 +55,8 @@ package SoMuchSpace.components
 			container.addEventListener(Event.ADDED, onChildAddedToContainer);
 			container.addEventListener(Event.REMOVED, onChildRemovedFromContainer);
 			
-			// TODO: вложенные крулпане
-			hitSprite.addEventListener(MouseEvent.MOUSE_WHEEL, onMouseWheel);
 			container.addEventListener(MouseEvent.MOUSE_WHEEL, onMouseWheel);
+			_hitSprite.addEventListener(MouseEvent.MOUSE_WHEEL, onMouseWheel);
 		}
 		
 		private function createXScrollBar():void
@@ -291,11 +293,11 @@ package SoMuchSpace.components
 			container.minWidth = maskWidth;
 			container.minHeight = maskHeight;
 			
-			hitSprite.graphics.clear();
-			hitSprite.graphics.beginFill(0, 0);
-			hitSprite.graphics.drawRect(0, 0, maskWidth, maskHeight);
-			hitSprite.graphics.endFill();
-			container.hitArea = hitSprite;
+			_hitSprite.graphics.clear();
+			_hitSprite.graphics.beginFill(0, 0);
+			_hitSprite.graphics.drawRect(0, 0, maskWidth, maskHeight);
+			_hitSprite.graphics.endFill();
+			container.hitArea = _hitSprite;
 		}
 		
 		private function deleteXScrollbar():void
@@ -314,14 +316,58 @@ package SoMuchSpace.components
 		
 		private function onMouseWheel(e:MouseEvent):void
 		{
-			if (yScrollbar && yScrollbar.enabled)
+			var displayObject:DisplayObject = e.target as DisplayObject;
+			
+			var parentScrollpane:ScrollPane = getFirstParentScrollPane(displayObject);
+			
+			while(parentScrollpane)
 			{
-				yScrollbar.scrollPosition -= yScrollbar.arrowsScrollSize * e.delta;
+				var targetScrollbar:Scrollbar;
+				if (parentScrollpane.yScrollbar && parentScrollpane.yScrollbar.enabled)
+				{
+					targetScrollbar = parentScrollpane.yScrollbar;
+				}
+				else if (parentScrollpane.xScrollbar && parentScrollpane.xScrollbar.enabled)
+				{
+					targetScrollbar = parentScrollpane.xScrollbar;
+				}
+				
+				if (targetScrollbar)
+				{
+					var canScrollFurther:Boolean = e.delta > 0 && targetScrollbar.scrollPosition != targetScrollbar.minScrollPosition
+						|| e.delta < 0 && targetScrollbar.scrollPosition != targetScrollbar.maxScrollPosition;
+					if (canScrollFurther)
+					{
+						targetScrollbar.scrollPosition -= targetScrollbar.arrowsScrollSize * e.delta;
+						break;
+					}
+					else if(scrollIfChildScrollPaneCant)
+					{
+						parentScrollpane = getFirstParentScrollPane(parentScrollpane);
+					}
+					else
+					{
+						break;
+					}
+				}
 			}
-			else if (xScrollbar && xScrollbar.enabled)
+			
+		}
+		
+		private function getFirstParentScrollPane(displayObject:DisplayObject):ScrollPane
+		{
+			var displayObjectContainer:DisplayObjectContainer = displayObject.parent;
+			
+			while (displayObjectContainer)
 			{
-				xScrollbar.scrollPosition -= xScrollbar.arrowsScrollSize * e.delta;
+				if (displayObjectContainer is ScrollPane)
+				{
+					return displayObjectContainer as ScrollPane;
+				}
+				displayObjectContainer = displayObjectContainer.parent;
 			}
+			
+			return null;
 		}
 		
 		public function get yScrollbar():Scrollbar
