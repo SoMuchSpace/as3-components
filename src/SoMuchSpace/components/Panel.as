@@ -11,9 +11,11 @@ package SoMuchSpace.components
 		
 		private var _background:Boolean = false;
 		private var _backgroundColor:Number = 0xFFFFFF;
+		private var _backgroundAlpha:Number = 1;
 		
 		private var _border:Boolean = false;
 		private var _borderColor:Number = 0x000000;
+		private var _borderAlpha:Number = 0x000000;
 		
 		private var _container:Container = new Container();
 		
@@ -48,11 +50,11 @@ package SoMuchSpace.components
 			graphics.clear();
 			if (background)
 			{
-				graphics.beginFill(backgroundColor);
+				graphics.beginFill(backgroundColor, backgroundAlpha);
 			}
 			if (border)
 			{
-				graphics.lineStyle(1, borderColor);
+				graphics.lineStyle(1, borderColor, borderAlpha);
 			}
 			graphics.drawRect(0, 0, componentWidth, componentHeight);
 			graphics.endFill();
@@ -94,6 +96,28 @@ package SoMuchSpace.components
 		}
 		
 		public function get container():Container { return _container; }
+		
+		public function get backgroundAlpha():Number 
+		{
+			return _backgroundAlpha;
+		}
+		
+		public function set backgroundAlpha(value:Number):void 
+		{
+			_backgroundAlpha = value;
+			invalidate();
+		}
+		
+		public function get borderAlpha():Number 
+		{
+			return _borderAlpha;
+		}
+		
+		public function set borderAlpha(value:Number):void 
+		{
+			_borderAlpha = value;
+			invalidate();
+		}
 	}
 
 }
