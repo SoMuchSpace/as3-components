@@ -6,7 +6,6 @@ package SoMuchSpace.components
 	import flash.events.Event;
 	import flash.events.MouseEvent;
 	import flash.geom.Rectangle;
-	import flash.utils.getTimer;
 	import SoMuchSpace.components.events.ComponentEvent;
 	import SoMuchSpace.components.scrollbar.Scrollbar;
 	import SoMuchSpace.components.scrollbar.ScrollbarDisplayPolicy;
@@ -414,6 +413,10 @@ package SoMuchSpace.components
 					{
 						break;
 					}
+				}
+				else
+				{
+					break;
 				}
 			}
 			
