@@ -15,7 +15,7 @@ package SoMuchSpace.components
 		
 		private var _border:Boolean = false;
 		private var _borderColor:Number = 0x000000;
-		private var _borderAlpha:Number = 0x000000;
+		private var _borderAlpha:Number = 1;
 		
 		private var _container:Container = new Container();
 		
