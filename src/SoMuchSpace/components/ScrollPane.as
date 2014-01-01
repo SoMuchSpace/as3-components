@@ -26,7 +26,7 @@ package SoMuchSpace.components
 		
 		private var _hitSprite:Sprite = new Sprite();
 		
-		public var scrollIfChildScrollPaneCant:Boolean = false;
+		public var scrollIfChildScrollPaneCant:Boolean = true;
 		
 		public function ScrollPane(componentWidth:Number = 100, componentHeight:Number = 100,
 			verticalScrollbarDisplayPolicy:String = "scrollbarAsNeeded", 
